@@ -1,0 +1,43 @@
+import pandas as pd 
+import numpy as np
+GASTOS = pd.read_excel(r'C:\Users\geosh\Documents\DATASETS AND PROJECTS\GASTOSPERSONALES.xlsx')
+GASTOS
+
+##PASOS A SEGUIR LIMPIAR DATOS 
+## MAPPING DE ESENCIAL Y NO ESENCIAL
+## OBJETVO, HACER UN ANALISIS EXPLORATORIO DE LOS GASTOS
+## PREDECIR GASTOS A FUTURO
+## VER PATRON DE GASTOS 
+## AÑADIR VARIABLES INDEPENDIENTES COMO EL SALARIO
+## ESTABLECER MODELO DE PREDICCION
+## VERIFICAR CALIDAD DE LOS RESULTADOS
+
+GASTOS['EXPENSE'].value_counts()
+GASTOS.count()
+GASTOS.info()
+GASTOS = GASTOS.sort_values('DATE', ascending=True)
+
+## ANALISIS VISUAL 
+GRÁFICO 1: Realiza una breve comparación entre gastos esenciales y no escenciales.
+import seaborn as sns
+EXPENSES = GASTOS['TYPE']
+sns.set_theme(style="whitegrid", palette="Spectral")
+sns.displot(EXPENSES, bins=4)
+
+GRÁFICO 2 = Muestra los gastos a lo largo del tiempo
+GASTOSPORDIA = GASTOS.groupby('DATE').agg({'AMOUNT': 'sum'})
+GASTOSPORDIA
+
+plt.plot(GASTOSPORDIA.index, GASTOSPORDIA['AMOUNT'])
+
+# Personalizar el gráfico
+plt.title('Gastos en el Tiempo')
+plt.xticks(rotation='vertical')
+plt.xlabel('Fecha')
+plt.ylabel('Gastos')
+# Mostrar el gráfico
+plt.show()
+
+#GRÁFICO 3 = PORCENTAJE SEGUN TIPO DE GASTOS
+
+
